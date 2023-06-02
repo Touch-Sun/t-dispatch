@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.admin.entity;
+package io.github.touchsun.tdispatch.core.entity;
 
 import org.springframework.util.StringUtils;
 

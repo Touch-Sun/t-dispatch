@@ -11,18 +11,6 @@
 
     <artifactId>t-dispatch-admin</artifactId>
     <packaging>jar</packaging>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-parent</artifactId>
-                <version>${spring-boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
     
     <dependencies>
         <!--Web服务-->
@@ -44,16 +32,17 @@
             <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
 
-        <!--邮件客户端-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-mail</artifactId>
-        </dependency>
-
         <!--健康检查-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
         </dependency>
 
         <!--Mybatis-->
@@ -62,17 +51,26 @@
             <artifactId>mybatis-spring-boot-starter</artifactId>
             <version>${mybatis-spring-boot-starter.version}</version>
         </dependency>
-
-        <!--Mysql-->
+        
+        <!--t-dispatch-core-->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
-            <version>${mysql-connector-j.version}</version>
+            <groupId>io.github.touchsun</groupId>
+            <artifactId>t-dispatch-core</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
+        
+        <!--t-dispatch-api-->
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <groupId>io.github.touchsun</groupId>
+            <artifactId>t-dispatch-api</artifactId>
+            <version>0.1-SNAPSHOT</version>
+        </dependency>
+
+        <!--t-dispatch-db-->
+        <dependency>
+            <groupId>io.github.touchsun</groupId>
+            <artifactId>t-dispatch-db</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

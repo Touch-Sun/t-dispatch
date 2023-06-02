@@ -4,7 +4,7 @@
 <mapper namespace="io.github.touchsun.tdispatch.admin.mapper.UserMapper">
     
     <!--结果集-->
-    <resultMap id="XxlJobUser" type="io.github.touchsun.tdispatch.admin.entity.User" >
+    <resultMap id="User" type="io.github.touchsun.tdispatch.admin.entity.User" >
         <result column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />
@@ -22,7 +22,7 @@
     </sql>
 
     <!--分页查询-->
-    <select id="pageList" parameterType="java.util.HashMap" resultMap="XxlJobUser">
+    <select id="pageList" parameterType="java.util.HashMap" resultMap="User">
         SELECT <include refid="Base_Column_List" />
         FROM user AS t
         <trim prefix="WHERE" prefixOverrides="AND | OR" >

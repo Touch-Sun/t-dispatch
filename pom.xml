@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.touchsun</groupId>
+    <groupId>io.github.touchsun</groupId>
     <artifactId>t-dispatch</artifactId>
     <version>0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -11,6 +11,7 @@
     
     <modules>
         <module>t-dispatch-admin</module>
+        <module>t-dispatch-core</module>
     </modules>
 
     <properties>

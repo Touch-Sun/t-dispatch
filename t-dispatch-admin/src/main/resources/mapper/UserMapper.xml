@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="io.github.touchsun.tdispatch.admin.mapper.UserMapper">
+    
+    <!--结果集-->
+    <resultMap id="XxlJobUser" type="io.github.touchsun.tdispatch.admin.entity.User" >
+        <result column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="role" property="role" />
+        <result column="permission" property="permission" />
+    </resultMap>
+
+    <!--基础全查询SQL-->
+    <sql id="Base_Column_List">
+        t.id,
+		t.username,
+		t.password,
+		t.role,
+		t.permission
+    </sql>
+
+    <!--分页查询-->
+    <select id="pageList" parameterType="java.util.HashMap" resultMap="XxlJobUser">
+        SELECT <include refid="Base_Column_List" />
+        FROM user AS t
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="username != null and username != ''">
+                AND t.username like CONCAT(CONCAT('%', #{username}), '%')
+            </if>
+            <if test="role gt -1">
+                AND t.role = #{role}
+            </if>
+        </trim>
+        ORDER BY username ASC
+        LIMIT #{offset}, #{pageSize}
+    </select>
+</mapper>

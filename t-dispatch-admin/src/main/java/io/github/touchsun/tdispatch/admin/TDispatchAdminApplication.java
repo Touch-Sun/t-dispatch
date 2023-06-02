@@ -1,4 +1,4 @@
-package com.touchsun.tdispatch.admin;
+package io.github.touchsun.tdispatch.admin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

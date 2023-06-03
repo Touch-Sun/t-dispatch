@@ -8,8 +8,9 @@
         <artifactId>t-dispatch</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>t-dispatch-db</artifactId>
+
+    <description>A distributed task scheduling framework database access module.</description>
 
     <dependencies>
         <!--Mybatis-->

@@ -8,10 +8,11 @@
         <artifactId>t-dispatch</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>t-dispatch-admin</artifactId>
     <packaging>jar</packaging>
-    
+
+    <description>A distributed task scheduling framework web visit module.</description>
+
     <dependencies>
         <!--Web服务-->
         <dependency>

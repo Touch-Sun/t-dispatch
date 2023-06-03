@@ -8,8 +8,9 @@
         <artifactId>t-dispatch</artifactId>
         <version>0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>t-dispatch-api</artifactId>
+
+    <description>A distributed task scheduling framework api service module.</description>
 
     <dependencies>
         <!--Lombok-->

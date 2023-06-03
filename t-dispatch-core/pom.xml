@@ -51,6 +51,13 @@
             <version>${slf4j-api.version}</version>
         </dependency>
 
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+        </dependency>
+
         <!--Java注解支持-->
         <dependency>
             <groupId>javax.annotation</groupId>

@@ -4,7 +4,7 @@
 <mapper namespace="io.github.touchsun.tdispatch.db.mapper.UserMapper">
     
     <!--结果集-->
-    <resultMap id="User" type="io.github.touchsun.tdispatch.core.entity.User" >
+    <resultMap id="User" type="io.github.touchsun.tdispatch.core.model.User" >
         <result column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />

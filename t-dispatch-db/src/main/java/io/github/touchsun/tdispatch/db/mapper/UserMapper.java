@@ -1,6 +1,6 @@
 package io.github.touchsun.tdispatch.db.mapper;
 
-import io.github.touchsun.tdispatch.core.entity.User;
+import io.github.touchsun.tdispatch.core.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;

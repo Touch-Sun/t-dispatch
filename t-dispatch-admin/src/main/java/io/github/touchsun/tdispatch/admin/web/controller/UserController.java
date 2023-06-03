@@ -1,7 +1,7 @@
 package io.github.touchsun.tdispatch.admin.web.controller;
 
+import io.github.touchsun.tdispatch.core.http.Result;
 import io.github.touchsun.tdispatch.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +22,7 @@ public class UserController {
     private UserService userService;
     
     @GetMapping("/hello")
-    public String hello() {
-        return userService.hello();
+    public Result<String> hello() {
+        return Result.success(userService.hello());
     }
 }

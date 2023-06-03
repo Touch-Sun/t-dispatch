@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.core.entity;
+package io.github.touchsun.tdispatch.core.model;
 
 import lombok.Data;
 import org.springframework.util.StringUtils;

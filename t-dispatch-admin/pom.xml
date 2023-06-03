@@ -46,11 +46,11 @@
             <version>${lombok.version}</version>
         </dependency>
 
-        <!--Mybatis-->
+        <!--MybatisPlus-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter.version}</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-spring-boot-starter.version}</version>
         </dependency>
         
         <!--t-dispatch-core-->

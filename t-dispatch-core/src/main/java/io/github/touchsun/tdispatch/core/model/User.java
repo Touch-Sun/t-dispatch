@@ -1,53 +1,43 @@
 package io.github.touchsun.tdispatch.core.model;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.github.touchsun.tdispatch.core.base.BaseModel;
 import lombok.Data;
-import org.springframework.util.StringUtils;
+import lombok.EqualsAndHashCode;
 
-import java.util.Arrays;
+import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
+ * 用户
+ *
  * @author lee
- * @since 2023/6/1 21:28
+ * @since 2023/6/2 22:07
  */
 @Data
-public class User {
+@EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties({"password"})
+@TableName(value = "user")
+public class User extends BaseModel implements Serializable {
+    
+    private static final long serialVersionUID = 4860310301120611797L;
+    
+    private String phone;
 
-    private int id;
+    private String email;
 
-    /**
-     * 账号
-     */
-    private String username;
-    /**
-     * 密码
-     */
     private String password;
-    /**
-     * 角色：0-普通用户、1-管理员
-     */
-    private int role;
-    /**
-     * 权限：执行引擎ID列表，多个逗号分割
-     */
-    private String permission;
 
-    /**
-     * 权限验证
-     *
-     * @param engineGroup 执行引擎ID
-     * @return 是否含有权限
-     */
-    public boolean validPermission(int engineGroup) {
-        boolean isValid = false;
-        if (this.role == 1) {
-            isValid = true;
-        } else if (StringUtils.hasText(this.permission)) {
-            isValid = Arrays.stream(this.permission.split(",")).anyMatch(item -> String.valueOf(engineGroup).equals(item));
-        }
+    private String userName;
 
-        return isValid;
+    private String type;
 
-    }
+    private LocalDate authorizeStartDate;
 
+    private LocalDate authorizeEndDate;
 
+    private String status;
+
+    private String menuList;
 }

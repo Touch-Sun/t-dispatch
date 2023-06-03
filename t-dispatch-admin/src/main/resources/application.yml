@@ -7,14 +7,14 @@ management:
     mail:
       enabled: false
   server:
-    # Health check information endpoint
+    # 运行状况检查信息端点
     base-path: /actuator
 spring:
   mvc:
     servlet:
-      # The startup timing of the Dispatcher Servlet component defaults to -1, 
-      # by default the Dispatcher Servlet component will load dynamically on the first request, 
-      # specifying a positive integer or 0 to load the Dispatcher Servlet directly after the program starts
+      # Dispatcher Servlet 组件的启动时间默认为 -1，
+      # 默认情况下，Dispatcher Servlet 组件将在第一个请求时动态加载，
+      # 指定一个正整数或 0 以在程序启动后直接加载 Dispatcher Servlet
       load-on-startup: 0
     static-path-pattern: /static/**
   web:
@@ -58,5 +58,8 @@ spring:
           starttls:
             enable: true
             required: true
-mybatis:
-  mapper-locations: classpath:/mapper/*Mapper.xml
+mybatis-plus:
+  configuration:
+    # sql 日志
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true

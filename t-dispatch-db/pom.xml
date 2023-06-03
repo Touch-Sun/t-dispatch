@@ -13,11 +13,11 @@
     <description>A distributed task scheduling framework database access module.</description>
 
     <dependencies>
-        <!--Mybatis-->
+        <!--MybatisPlus-->
         <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot-starter.version}</version>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-spring-boot-starter.version}</version>
         </dependency>
 
         <!--单元测试-->

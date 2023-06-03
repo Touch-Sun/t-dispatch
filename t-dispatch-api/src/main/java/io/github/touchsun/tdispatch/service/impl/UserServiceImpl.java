@@ -20,7 +20,6 @@ import javax.annotation.Resource;
  * @since 2023/6/2 22:35
  */
 @Service
-@Component
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     
     @Resource

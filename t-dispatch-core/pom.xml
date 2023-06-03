@@ -14,6 +14,12 @@
     <description>A distributed task scheduling framework core module.</description>
 
     <dependencies>
+        <!--Web服务-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        
         <!--高性能HTTP处理 Netty-->
         <dependency>
             <groupId>io.netty</groupId>

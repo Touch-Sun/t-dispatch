@@ -1,6 +1,9 @@
 package io.github.touchsun.tdispatch.admin.web.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.touchsun.tdispatch.core.http.Result;
+import io.github.touchsun.tdispatch.core.model.User;
+import io.github.touchsun.tdispatch.query.UserQuery;
 import io.github.touchsun.tdispatch.service.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,5 +27,10 @@ public class UserController {
     @GetMapping("/hello")
     public Result<String> hello() {
         return Result.success(userService.hello());
+    }
+    
+    @GetMapping
+    public Result<Page<User>> selectAll(UserQuery query) {
+        return Result.success(this.userService.pageList(query));
     }
 }

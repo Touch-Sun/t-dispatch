@@ -11,11 +11,30 @@
  Target Server Version : 80032
  File Encoding         : 65001
 
- Date: 04/06/2023 14:48:51
+ Date: 04/06/2023 15:00:38
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for dict
+-- ----------------------------
+DROP TABLE IF EXISTS `dict`;
+CREATE TABLE `dict`  (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `key` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL COMMENT '键',
+  `value` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '值',
+  `type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL COMMENT '类型',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `create_user_id` int NULL DEFAULT NULL,
+  `create_user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `update_user_id` int NULL DEFAULT NULL,
+  `update_user_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NULL DEFAULT NULL,
+  `del` int NULL DEFAULT 0 COMMENT '删除标记',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for user
@@ -41,10 +60,5 @@ CREATE TABLE `user`  (
   `del` int NULL DEFAULT 0 COMMENT '删除标记',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8mb3 COLLATE = utf8mb3_general_ci COMMENT = '用户' ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES (5, '超级管理员', 'admin', 'admin', NULL, '123456', '2023-01-27', '2199-11-22', 'init', NULL, '2023-01-27 18:34:53', '2023-03-21 14:02:39', NULL, '1', 5, '1', 0);
 
 SET FOREIGN_KEY_CHECKS = 1;

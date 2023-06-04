@@ -8,7 +8,6 @@ import io.github.touchsun.tdispatch.core.model.User;
 import io.github.touchsun.tdispatch.db.mapper.UserMapper;
 import io.github.touchsun.tdispatch.query.UserQuery;
 import io.github.touchsun.tdispatch.service.UserService;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

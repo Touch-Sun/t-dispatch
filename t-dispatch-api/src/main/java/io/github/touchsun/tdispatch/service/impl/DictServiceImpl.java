@@ -1,8 +1,13 @@
 package io.github.touchsun.tdispatch.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import io.github.touchsun.tdispatch.core.model.Dict;
+import io.github.touchsun.tdispatch.core.model.Dict;
 import io.github.touchsun.tdispatch.db.mapper.DictMapper;
+import io.github.touchsun.tdispatch.query.DictQuery;
 import io.github.touchsun.tdispatch.service.DictService;
 import org.springframework.stereotype.Service;
 
@@ -20,4 +25,11 @@ public class DictServiceImpl extends ServiceImpl<DictMapper, Dict> implements Di
     @Resource
     private DictMapper dictMapper;
 
+    @Override
+    public Page<Dict> pageList(DictQuery dictQuery) {
+        return dictMapper.selectPage(dictQuery.outPage(), new QueryWrapper<Dict>().lambda()
+                .eq(StringUtils.isNotBlank(dictQuery.getType()), Dict::getType, dictQuery.getType())
+                .orderByDesc(Dict::getCreateTime)
+        );
+    }
 }

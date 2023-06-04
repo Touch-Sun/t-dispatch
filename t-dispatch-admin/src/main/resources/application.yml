@@ -63,3 +63,24 @@ mybatis-plus:
     # sql 日志
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     map-underscore-to-camel-case: true
+    
+# T - 调度核心配置文件
+tdispatch:
+  # 核心调度线程池配置
+  pool:
+    # 高速触发线程池
+    fast:
+      # 核心线程数 - 要保留在池中的线程数
+      corePoolSize: 10
+      # 最大线程数 - 池中允许的最大线程数
+      maximumPoolSize: 200
+      # 存活时间 - 当线程数大于核心数时，这是多余的空闲线程在终止之前等待新任务的最长时间
+      keepAliveTime: 60
+    # 低速触发线程池
+    slow:
+      # 核心线程数 - 要保留在池中的线程数
+      corePoolSize: 10
+      # 最大线程数 - 池中允许的最大线程数
+      maximumPoolSize: 100
+      # 存活时间 - 当线程数大于核心数时，这是多余的空闲线程在终止之前等待新任务的最长时间
+      keepAliveTime: 60

@@ -31,7 +31,7 @@ public class Engine extends BaseModel implements Serializable {
     /**
      * 注册类型：0-自动 1-手动
      */
-    private String type;
+    private Integer type;
     /**
      * 执行引擎机器地址，逗号分割
      */

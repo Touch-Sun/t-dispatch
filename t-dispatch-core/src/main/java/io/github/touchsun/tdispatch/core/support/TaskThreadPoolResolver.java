@@ -90,9 +90,9 @@ public class TaskThreadPoolResolver {
      */
     public void stop() {
         FAST_TRIGGER_POOL.shutdownNow();
-        log.info("TDispatch🌤️高速触发线程池" + " 停止成功...");
+        log.info("TDispatch🌤️高速触发线程池, 停止成功...");
         SLOW_TRIGGER_POOL.shutdownNow();
-        log.info("TDispatch🌩️️低速触发线程池" + " 停止成功...");
+        log.info("TDispatch🌩️️低速触发线程池, 停止成功...");
     }
 
 }

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.github.touchsun.tdispatch.core.constant.ConstantNumber;
-import io.github.touchsun.tdispatch.core.model.User;
+import io.github.touchsun.tdispatch.core.sso.SsoUser;
 import lombok.Data;
 
 import java.util.Date;
@@ -60,23 +60,23 @@ public class BaseModel {
      */
     private String updateUserName;
 
-    public void parseUser(User user) {
-        createUserId = user.getId();
-        createUserName = user.getUserName();
-        updateUserId = user.getId();
-        updateUserName = user.getUserName();
+    public void parseUser(SsoUser ssoUser) {
+        createUserId = ssoUser.getId();
+        createUserName = ssoUser.getUserName();
+        updateUserId = ssoUser.getId();
+        updateUserName = ssoUser.getUserName();
     }
 
-    public static BaseModel newInstance(User user, boolean update) {
+    public static BaseModel newInstance(SsoUser ssoUser, boolean update) {
         BaseModel baseModel = new BaseModel();
         if (!update) {
-            baseModel.parseUser(user);
+            baseModel.parseUser(ssoUser);
             baseModel.setCreateTime(new Date());
             baseModel.setUpdateTime(new Date());
             baseModel.setDel(ConstantNumber.ZERO);
         } else {
-            baseModel.setUpdateUserName(user.getUpdateUserName());
-            baseModel.setUpdateUserId(user.getId());
+            baseModel.setUpdateUserName(ssoUser.getUpdateUserName());
+            baseModel.setUpdateUserId(ssoUser.getId());
             baseModel.setUpdateTime(new Date());
         }
         return baseModel;

@@ -2,10 +2,10 @@ package io.github.touchsun.tdispatch.admin.web.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.touchsun.tdispatch.core.http.Result;
-import io.github.touchsun.tdispatch.core.model.Dict;
+import io.github.touchsun.tdispatch.api.model.Dict;
 import io.github.touchsun.tdispatch.core.util.CrudUtil;
-import io.github.touchsun.tdispatch.query.DictQuery;
-import io.github.touchsun.tdispatch.service.DictService;
+import io.github.touchsun.tdispatch.api.query.DictQuery;
+import io.github.touchsun.tdispatch.admin.service.DictService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,7 +1,7 @@
 package io.github.touchsun.tdispatch.core.util;
 
 import io.github.touchsun.tdispatch.core.base.BaseModel;
-import io.github.touchsun.tdispatch.core.sso.UserHolder;
+import io.github.touchsun.tdispatch.core.sso.SsoUserHolder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 
@@ -26,7 +26,7 @@ public class CrudUtil {
             // 实例化Entity
             T result = entity.newInstance();
             // 得到基础用户操作信息
-            BaseModel baseModel = BaseModel.newInstance(UserHolder.get(), false);
+            BaseModel baseModel = BaseModel.newInstance(SsoUserHolder.get(), false);
             // 先拷贝前端表单信息
             BeanUtils.copyProperties(dto, result);
             // 再拷贝用户操作信息
@@ -51,7 +51,7 @@ public class CrudUtil {
             // 实例化Entity
             T result = entity.newInstance();
             // 得到基础用户操作信息
-            BaseModel baseModel = BaseModel.newInstance(UserHolder.get(), true);
+            BaseModel baseModel = BaseModel.newInstance(SsoUserHolder.get(), true);
             // 先拷贝用户操作信息
             BeanUtils.copyProperties(baseModel, result);
             // 在拷贝前端表单信息
@@ -90,7 +90,7 @@ public class CrudUtil {
             // 实例化Entity
             T result = entity.newInstance();
             // 得到基础用户操作信息
-            BaseModel baseModel = BaseModel.newInstance(UserHolder.get(), update);
+            BaseModel baseModel = BaseModel.newInstance(SsoUserHolder.get(), update);
             // 拷贝用户操作信息
             BeanUtils.copyProperties(baseModel, result);
             // 返回

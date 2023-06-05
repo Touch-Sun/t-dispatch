@@ -13,7 +13,6 @@
     <modules>
         <module>t-dispatch-admin</module>
         <module>t-dispatch-core</module>
-        <module>t-dispatch-db</module>
         <module>t-dispatch-api</module>
     </modules>
 

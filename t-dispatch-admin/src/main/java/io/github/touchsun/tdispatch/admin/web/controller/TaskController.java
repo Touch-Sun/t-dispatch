@@ -2,10 +2,10 @@ package io.github.touchsun.tdispatch.admin.web.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.github.touchsun.tdispatch.core.http.Result;
-import io.github.touchsun.tdispatch.core.model.Task;
+import io.github.touchsun.tdispatch.api.model.Task;
 import io.github.touchsun.tdispatch.core.util.CrudUtil;
-import io.github.touchsun.tdispatch.query.TaskQuery;
-import io.github.touchsun.tdispatch.service.TaskService;
+import io.github.touchsun.tdispatch.api.query.TaskQuery;
+import io.github.touchsun.tdispatch.admin.service.TaskService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -52,6 +52,13 @@
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>${mybatis-plus-spring-boot-starter.version}</version>
         </dependency>
+
+        <!--Mysql-->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>${mysql-connector-j.version}</version>
+        </dependency>
         
         <!--t-dispatch-core-->
         <dependency>
@@ -64,13 +71,6 @@
         <dependency>
             <groupId>io.github.touchsun</groupId>
             <artifactId>t-dispatch-api</artifactId>
-            <version>0.1-SNAPSHOT</version>
-        </dependency>
-
-        <!--t-dispatch-db-->
-        <dependency>
-            <groupId>io.github.touchsun</groupId>
-            <artifactId>t-dispatch-db</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
         

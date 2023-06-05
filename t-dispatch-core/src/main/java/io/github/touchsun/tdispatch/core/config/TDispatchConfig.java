@@ -1,5 +1,6 @@
 package io.github.touchsun.tdispatch.core.config;
 
+import io.github.touchsun.tdispatch.core.support.init.Bootstrap;
 import lombok.Data;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -17,6 +18,11 @@ import org.springframework.context.annotation.Configuration;
 public class TDispatchConfig implements InitializingBean, DisposableBean {
 
     /**
+     * 核心启动文件
+     */
+    private Bootstrap bootstrap;
+
+    /**
      * 简单单例模式
      */
     private static TDispatchConfig tDispatchConfig = null;
@@ -27,13 +33,18 @@ public class TDispatchConfig implements InitializingBean, DisposableBean {
 
     @Override
     public void destroy() throws Exception {
-        
+        // 销毁
+        bootstrap.destroy();
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
         // Bean属性设置后回调, 此时将静态单例Bean指向到堆区
         tDispatchConfig = this;
+        // 实例化核心启动文件
+        bootstrap = new Bootstrap();
+        // 初始化
+        bootstrap.initialize();
     }
 
 

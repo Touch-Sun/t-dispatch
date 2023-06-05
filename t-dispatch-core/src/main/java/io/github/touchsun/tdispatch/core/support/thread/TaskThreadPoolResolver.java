@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.core.support;
+package io.github.touchsun.tdispatch.core.support.thread;
 
 import io.github.touchsun.tdispatch.core.config.TDispatchConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -9,7 +9,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
- * 任务触发线程池处理
+ * t-dispatch 任务触发线程池
  *
  * @author lee
  * @since 2023/6/4 16:36
@@ -68,7 +68,7 @@ public class TaskThreadPoolResolver {
                         return new Thread(r, "TDispatch🌤️高速触发线程-" + r.hashCode());
                     }
                 });
-        log.info("TDispatch🌤️高速触发线程池, 启动成功...");
+        log.info("TDispatch🌤️高速触发线程池, 启动成功... ...");
         SLOW_TRIGGER_POOL = new ThreadPoolExecutor(
                 config.getSlowCorePoolSize(),
                 config.getSlowMaximumPoolSize(),
@@ -82,7 +82,7 @@ public class TaskThreadPoolResolver {
                         return new Thread(r, "TDispatch🌩️低速触发线程-" + r.hashCode());
                     }
                 });
-        log.info("TDispatch🌩️低速触发线程池, 启动成功...");
+        log.info("TDispatch🌩️低速触发线程池, 启动成功... ...");
     }
 
     /**
@@ -90,9 +90,9 @@ public class TaskThreadPoolResolver {
      */
     public void stop() {
         FAST_TRIGGER_POOL.shutdownNow();
-        log.info("TDispatch🌤️高速触发线程池, 停止成功...");
+        log.info("TDispatch🌤️高速触发线程池, 停止成功... ...");
         SLOW_TRIGGER_POOL.shutdownNow();
-        log.info("TDispatch🌩️️低速触发线程池, 停止成功...");
+        log.info("TDispatch🌩️️低速触发线程池, 停止成功... ...");
     }
 
 }

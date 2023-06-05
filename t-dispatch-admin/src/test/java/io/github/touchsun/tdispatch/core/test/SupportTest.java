@@ -1,7 +1,7 @@
 package io.github.touchsun.tdispatch.core.test;
 
 import io.github.touchsun.tdispatch.admin.TDispatchAdminApplication;
-import io.github.touchsun.tdispatch.core.support.TaskThreadPoolResolver;
+import io.github.touchsun.tdispatch.core.support.thread.TaskThreadPoolResolver;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

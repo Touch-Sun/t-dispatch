@@ -6,7 +6,7 @@ import io.github.touchsun.tdispatch.core.model.Engine;
 import io.github.touchsun.tdispatch.query.EngineQuery;
 
 /**
- * 用户服务接口
+ * 执行引擎服务接口
  *
  * @author lee
  * @since 2023/6/2 22:31

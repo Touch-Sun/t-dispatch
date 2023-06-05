@@ -95,6 +95,9 @@ public class TaskThreadPoolResolver {
         log.info("TDispatch🌩️️低速触发线程池, 停止成功... ...");
     }
 
+    public void commit() {
+        
+    }
 }
 
 

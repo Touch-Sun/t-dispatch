@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2023/6/1 21:28
  */
 @SpringBootApplication(scanBasePackages = "io.github.touchsun.tdispatch")
-@MapperScan(basePackages = "io.github.touchsun.tdispatch.admin.mapper")
+@MapperScan(basePackages = "io.github.touchsun.tdispatch.api.mapper")
 public class TDispatchAdminApplication {
     public static void main(String[] args) {
         SpringApplication.run(TDispatchAdminApplication.class, args);

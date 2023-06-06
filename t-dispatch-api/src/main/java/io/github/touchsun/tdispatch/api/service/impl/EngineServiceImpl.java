@@ -1,13 +1,13 @@
-package io.github.touchsun.tdispatch.admin.service.impl;
+package io.github.touchsun.tdispatch.api.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import io.github.touchsun.tdispatch.api.mapper.EngineMapper;
 import io.github.touchsun.tdispatch.api.model.Engine;
-import io.github.touchsun.tdispatch.admin.mapper.EngineMapper;
 import io.github.touchsun.tdispatch.api.query.EngineQuery;
-import io.github.touchsun.tdispatch.admin.service.EngineService;
+import io.github.touchsun.tdispatch.api.service.EngineService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

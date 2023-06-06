@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.admin.mapper;
+package io.github.touchsun.tdispatch.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import io.github.touchsun.tdispatch.api.model.Engine;

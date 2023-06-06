@@ -5,7 +5,7 @@ import io.github.touchsun.tdispatch.core.http.Result;
 import io.github.touchsun.tdispatch.api.model.User;
 import io.github.touchsun.tdispatch.core.util.CrudUtil;
 import io.github.touchsun.tdispatch.api.query.UserQuery;
-import io.github.touchsun.tdispatch.admin.service.UserService;
+import io.github.touchsun.tdispatch.api.service.UserService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

@@ -1,6 +1,6 @@
 package io.github.touchsun.tdispatch.admin.config;
 
-import io.github.touchsun.tdispatch.admin.service.TaskService;
+import io.github.touchsun.tdispatch.api.service.TaskService;
 import io.github.touchsun.tdispatch.admin.support.init.Bootstrap;
 import lombok.Data;
 import org.springframework.beans.factory.DisposableBean;

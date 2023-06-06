@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.admin.service;
+package io.github.touchsun.tdispatch.api.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import io.github.touchsun.tdispatch.api.model.Registry;

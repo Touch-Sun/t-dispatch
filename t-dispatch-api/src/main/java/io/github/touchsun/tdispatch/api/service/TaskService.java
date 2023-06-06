@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.admin.service;
+package io.github.touchsun.tdispatch.api.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;

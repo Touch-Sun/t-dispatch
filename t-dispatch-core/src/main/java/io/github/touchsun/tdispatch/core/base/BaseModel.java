@@ -75,7 +75,7 @@ public class BaseModel {
             baseModel.setUpdateTime(new Date());
             baseModel.setDel(ConstantNumber.ZERO);
         } else {
-            baseModel.setUpdateUserName(ssoUser.getUpdateUserName());
+            baseModel.setUpdateUserName(ssoUser.getUserName());
             baseModel.setUpdateUserId(ssoUser.getId());
             baseModel.setUpdateTime(new Date());
         }

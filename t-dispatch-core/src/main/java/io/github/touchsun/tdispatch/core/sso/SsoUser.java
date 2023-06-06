@@ -1,9 +1,6 @@
 package io.github.touchsun.tdispatch.core.sso;
 
-import com.baomidou.mybatisplus.annotation.TableName;
-import io.github.touchsun.tdispatch.core.base.BaseModel;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -15,9 +12,7 @@ import java.time.LocalDate;
  * @since 2023/6/2 22:07
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@TableName(value = "user")
-public class SsoUser extends BaseModel implements Serializable {
+public class SsoUser implements Serializable {
     
     private static final long serialVersionUID = 4860310301120611797L;
 

@@ -1,5 +1,6 @@
 package io.github.touchsun.tdispatch.admin.config;
 
+import io.github.touchsun.tdispatch.api.service.EngineService;
 import io.github.touchsun.tdispatch.api.service.TaskService;
 import io.github.touchsun.tdispatch.admin.support.init.Bootstrap;
 import lombok.Data;
@@ -71,4 +72,7 @@ public class TDispatchConfig implements InitializingBean, DisposableBean {
     
     @Resource
     private TaskService taskService;
+    
+    @Resource
+    private EngineService engineService;
 }

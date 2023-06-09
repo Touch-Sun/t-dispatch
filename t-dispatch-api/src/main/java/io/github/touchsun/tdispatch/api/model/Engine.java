@@ -2,10 +2,16 @@ package io.github.touchsun.tdispatch.api.model;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.github.touchsun.tdispatch.core.base.BaseModel;
+import io.github.touchsun.tdispatch.core.util.EmptyUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 执行引擎
@@ -37,4 +43,21 @@ public class Engine extends BaseModel implements Serializable {
      */
     private String addressList;
 
+    /**
+     * 执行引擎机器地址List
+     * - 此处返回只读的List不允许调用方修改执行引擎地址
+     * 
+     * @return 执行引擎机器地址List
+     */
+    public List<String> listOfAddressList() {
+        List<String> result = new ArrayList<>(256);
+        if (EmptyUtil.isNotEmpty(addressList) && EmptyUtil.isNotEmpty(addressList.trim())) {
+            result = Collections.unmodifiableList(
+                    Arrays.stream(addressList.split(","))
+                            .map(String::trim)
+                            .filter(s -> !s.isEmpty())
+                            .collect(Collectors.toList()));
+        }
+        return result;
+    }
 }

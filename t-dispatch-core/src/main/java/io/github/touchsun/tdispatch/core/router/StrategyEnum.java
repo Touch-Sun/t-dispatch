@@ -3,10 +3,12 @@ package io.github.touchsun.tdispatch.core.router;
 import io.github.touchsun.tdispatch.core.router.strategy.FirstRouter;
 import io.github.touchsun.tdispatch.core.router.strategy.LastRouter;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 路由策略枚举类
  */
+@Slf4j
 public enum StrategyEnum {
 
     /**
@@ -83,7 +85,7 @@ public enum StrategyEnum {
      * @param defaultItem 默认路由策略
      * @return 匹配到的路由策略
      */
-    public static StrategyEnum match(String name, StrategyEnum defaultItem){
+    public static StrategyEnum parse(String name, StrategyEnum defaultItem){
         if (name != null) {
             for (StrategyEnum item: StrategyEnum.values()) {
                 if (item.name().equals(name)) {
@@ -91,6 +93,8 @@ public enum StrategyEnum {
                 }
             }
         }
+        // 系统未配置对应策略, 直接返回默认
+        log.warn("系统不支持的策略 - {}", defaultItem);
         return defaultItem;
     }
 

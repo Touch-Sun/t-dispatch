@@ -21,7 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Trigger {
 
     /**
-     * 静态任务触发触发
+     * 任务触发预处理
      *
      * @param taskId         任务ID
      * @param type           类型 {@link TriggerTypeEnum}
@@ -34,8 +34,8 @@ public class Trigger {
      * @param executorParam  执行参数
      * @param addressList    执行引擎地址列表 127.0.0.1,127.0.0.2...
      */
-    public static void trigger(final int taskId, final TriggerTypeEnum type, final int failRetryCount,
-                               final String shardingParam, final String executorParam, final String addressList) {
+    public static void triggerPreProcessing(final int taskId, final TriggerTypeEnum type, final int failRetryCount,
+                                            final String shardingParam, final String executorParam, final String addressList) {
         TDispatchConfig config = TDispatchConfig.getInstance();
 
         // 查询任务信息
@@ -80,12 +80,11 @@ public class Trigger {
                 && EmptyUtil.isNotEmpty(engine.listOfAddressList())
                 && EmptyUtil.isEmpty(realShardingParam)) {
             // 以0为起始分片索引, (假设此时注册实例为10个) 那么分片形式 -> 0/10, 1/10, 2/10, ... 9/10
+            // 分片总数
+            int total = engine.listOfAddressList().size();
             for (int index = 0; index < engine.listOfAddressList().size(); index++) {
-                // 分片索引
-                int sharingIndex = index;
-                int total = engine.listOfAddressList().size();
-                //TODO 实际触发任务
-                
+                // 实际触发任务
+                justDoIt(engine, task, taskFailRetryCount, strategyEnum, index, total);
             }
         } else {
             // 不是分片广播策略
@@ -93,8 +92,25 @@ public class Trigger {
                 // 也得给一个默认的分片参数 0/1
                 realShardingParam = new int[]{0, 1};
             }
-            //TODO 实际触发任务
+            // 实际触发任务
+            justDoIt(engine, task, taskFailRetryCount, strategyEnum, realShardingParam[0], realShardingParam[1]);
         }
+    }
+
+    /**
+     * 只管去做!
+     * - 实际任务触发
+     * 
+     * @param engine 引擎
+     * @param task 任务
+     * @param failRetryCount 重试次数(计算出最终的任务重试次数)
+     * @param strategyEnum 策略类型
+     * @param index 分片索引
+     * @param total 分片总数
+     */
+    public static void justDoIt(Engine engine, Task task, int failRetryCount, 
+                                StrategyEnum strategyEnum, int index, int total) {
+        
     }
 }
 

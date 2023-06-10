@@ -1,4 +1,4 @@
-package io.github.touchsun.tdispatch.core.dto;
+package io.github.touchsun.tdispatch.core.task.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -6,14 +6,14 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 任务触发传输对象
+ * 任务触发参数
  *
  * @author lee
  * @since 2023/6/7 8:43
  */
 @Data
 @Builder
-public class TriggerDTO implements Serializable {
+public class TriggerParam implements Serializable {
 
     private static final long serialVersionUID = 2631620028609316218L;
 
@@ -25,22 +25,22 @@ public class TriggerDTO implements Serializable {
     /**
      * 执行引擎处理器
      */
-    private String engineHandler;
+    private String executorHandler;
 
     /**
      * 执行引擎参数
      */
-    private String engineParams;
+    private String executorParams;
 
     /**
      * 执行引擎阻塞策略
      */
-    private String engineBlockStrategy;
+    private String executorBlockStrategy;
 
     /**
      * 执行引擎超时时间
      */
-    private int engineTimeout;
+    private int executorTimeout;
 
     /**
      * 日志 ID
@@ -68,12 +68,12 @@ public class TriggerDTO implements Serializable {
     private long glueUpdateTime;
 
     /**
-     * 广播参数：广播索引
+     * 分片参数：分片索引
      */
     private int broadcastIndex;
 
     /**
-     * 广播参数：广播总数
+     * 分片参数：分片总数
      */
     private int broadcastTotal;
 }

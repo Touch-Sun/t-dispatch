@@ -28,6 +28,7 @@
         <spring.version>5.3.26</spring.version>
         <spring-boot.version>2.7.9</spring-boot.version>
         <mybatis-plus-spring-boot-starter.version>3.4.0</mybatis-plus-spring-boot-starter.version>
+        <hutool.version>5.8.19</hutool.version>
         <mysql-connector-j.version>8.0.32</mysql-connector-j.version>
         <slf4j-api.version>1.7.36</slf4j-api.version>
         <junit-jupiter.version>5.9.2</junit-jupiter.version>

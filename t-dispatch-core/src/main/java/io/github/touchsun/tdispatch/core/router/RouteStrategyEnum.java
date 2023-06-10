@@ -2,14 +2,15 @@ package io.github.touchsun.tdispatch.core.router;
 
 import io.github.touchsun.tdispatch.core.router.strategy.FirstRouter;
 import io.github.touchsun.tdispatch.core.router.strategy.LastRouter;
+import io.github.touchsun.tdispatch.core.router.strategy.ShardingBroadcastRouter;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 路由策略枚举类
+ * 路由选择策略
  */
 @Slf4j
-public enum StrategyEnum {
+public enum RouteStrategyEnum {
 
     /**
      * 优先选择第一个引擎
@@ -47,7 +48,8 @@ public enum StrategyEnum {
     LEAST_RECENTLY_USED("选择最近最少使用的引擎", null),
 
     /**
-     * 选择可用性最高的引擎，即选择当前可用性最高的引擎，如果该引擎不可用，则自动切换到下一个可用引擎
+     * 选择可用性最高的引擎，即选择当前可用性最高的引擎，
+     * 如果该引擎不可用，则自动切换到下一个可用引擎
      */
     FAIL_OVER("选择可用性最高的引擎", null),
 
@@ -59,9 +61,9 @@ public enum StrategyEnum {
     /**
      * 引擎分片广播
      */
-    SHARDING_BROADCAST("引擎分片广播", null);
+    SHARDING_BROADCAST("引擎分片广播", new ShardingBroadcastRouter());
 
-    StrategyEnum(String title, EngineRouter router) {
+    RouteStrategyEnum(String title, EngineRouter router) {
         this.title = title;
         this.router = router;
     }
@@ -85,9 +87,9 @@ public enum StrategyEnum {
      * @param defaultItem 默认路由策略
      * @return 匹配到的路由策略
      */
-    public static StrategyEnum parse(String name, StrategyEnum defaultItem){
+    public static RouteStrategyEnum parse(String name, RouteStrategyEnum defaultItem){
         if (name != null) {
-            for (StrategyEnum item: StrategyEnum.values()) {
+            for (RouteStrategyEnum item: RouteStrategyEnum.values()) {
                 if (item.name().equals(name)) {
                     return item;
                 }

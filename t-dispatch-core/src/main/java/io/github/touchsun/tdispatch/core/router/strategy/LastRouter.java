@@ -1,7 +1,7 @@
 package io.github.touchsun.tdispatch.core.router.strategy;
 
 import io.github.touchsun.tdispatch.core.constant.ConstantNumber;
-import io.github.touchsun.tdispatch.core.dto.TriggerDTO;
+import io.github.touchsun.tdispatch.core.task.dto.TriggerParam;
 import io.github.touchsun.tdispatch.core.http.Result;
 import io.github.touchsun.tdispatch.core.router.EngineRouter;
 
@@ -16,7 +16,7 @@ import java.util.List;
 public class LastRouter extends EngineRouter {
     
     @Override
-    public Result<String> route(TriggerDTO triggerDTO, List<String> addressList) {
+    public Result<String> route(TriggerParam triggerParam, List<String> addressList) {
         return Result.success(addressList.get(addressList.size() - ConstantNumber.ONE));
     }
 }

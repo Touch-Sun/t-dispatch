@@ -8,7 +8,7 @@ import lombok.Getter;
  * @author lee
  * @since 2023/6/1 21:28
  */
-public enum StatusEnum {
+public enum ResultStatusEnum {
 
     /**
      * 操作成功
@@ -37,7 +37,7 @@ public enum StatusEnum {
     @Getter
     private final String message;
 
-    StatusEnum(int code, String message) {
+    ResultStatusEnum(int code, String message) {
         this.code = code;
         this.message = message;
     }

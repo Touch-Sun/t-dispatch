@@ -53,6 +53,13 @@
             <version>${mybatis-plus-spring-boot-starter.version}</version>
         </dependency>
 
+        <!--Hutool-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+
         <!--Mysql-->
         <dependency>
             <groupId>com.mysql</groupId>

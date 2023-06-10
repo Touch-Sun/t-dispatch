@@ -59,59 +59,59 @@ public class Result<T> implements Serializable {
         return result;
     }
 
-    public static <T> Result<T> reply(StatusEnum StatusEnum) {
+    public static <T> Result<T> reply(ResultStatusEnum ResultStatusEnum) {
         Result<T> result = reply();
-        result.setCode(StatusEnum.getCode());
-        result.setMessage(StatusEnum.getMessage());
+        result.setCode(ResultStatusEnum.getCode());
+        result.setMessage(ResultStatusEnum.getMessage());
         return result;
     }
 
-    public static <T> Result<T> reply(StatusEnum StatusEnum, T data) {
+    public static <T> Result<T> reply(ResultStatusEnum ResultStatusEnum, T data) {
         Result<T> result = reply();
-        result.setCode(StatusEnum.getCode());
-        result.setMessage(StatusEnum.getMessage());
+        result.setCode(ResultStatusEnum.getCode());
+        result.setMessage(ResultStatusEnum.getMessage());
         result.setData(data);
         return result;
     }
 
     public static <T> Result<T> success() {
-        return reply(StatusEnum.SUCCESS.getCode(), StatusEnum.SUCCESS.getMessage());
+        return reply(ResultStatusEnum.SUCCESS.getCode(), ResultStatusEnum.SUCCESS.getMessage());
     }
 
     public static <T> Result<T> success(T data) {
-        return reply(StatusEnum.SUCCESS.getCode(), data, StatusEnum.SUCCESS.getMessage());
+        return reply(ResultStatusEnum.SUCCESS.getCode(), data, ResultStatusEnum.SUCCESS.getMessage());
     }
 
     public static <T> Result<T> success(T data, String message) {
-        return reply(StatusEnum.SUCCESS.getCode(), data, message);
+        return reply(ResultStatusEnum.SUCCESS.getCode(), data, message);
     }
 
     public static <T> Result<T> failed() {
-        return reply(StatusEnum.FAILED.getCode(), StatusEnum.FAILED.getMessage());
+        return reply(ResultStatusEnum.FAILED.getCode(), ResultStatusEnum.FAILED.getMessage());
     }
 
     public static <T> Result<T> failed(String message) {
-        return reply(StatusEnum.FAILED.getCode(), message);
+        return reply(ResultStatusEnum.FAILED.getCode(), message);
     }
 
     public static <T> Result<T> unauthorized() {
-        return reply(StatusEnum.AUTHENTICATION_FAILED.getCode(), StatusEnum.AUTHENTICATION_FAILED.getMessage());
+        return reply(ResultStatusEnum.AUTHENTICATION_FAILED.getCode(), ResultStatusEnum.AUTHENTICATION_FAILED.getMessage());
     }
 
     public static <T> Result<T> unauthorized(T data) {
-        return reply(StatusEnum.AUTHENTICATION_FAILED.getCode(), data, StatusEnum.AUTHENTICATION_FAILED.getMessage());
+        return reply(ResultStatusEnum.AUTHENTICATION_FAILED.getCode(), data, ResultStatusEnum.AUTHENTICATION_FAILED.getMessage());
     }
 
     public static <T> Result<T> health() {
-        return reply(StatusEnum.APP_HEALTH.getCode(), StatusEnum.APP_HEALTH.getMessage());
+        return reply(ResultStatusEnum.APP_HEALTH.getCode(), ResultStatusEnum.APP_HEALTH.getMessage());
     }
 
     public static <T> Result<T> health(T data) {
-        return reply(StatusEnum.APP_HEALTH.getCode(), data, StatusEnum.APP_HEALTH.getMessage());
+        return reply(ResultStatusEnum.APP_HEALTH.getCode(), data, ResultStatusEnum.APP_HEALTH.getMessage());
     }
 
     public static <T> Result<T> unPermission() {
-        return reply(StatusEnum.PERMISSION_FAILED.getCode(), StatusEnum.PERMISSION_FAILED.getMessage());
+        return reply(ResultStatusEnum.PERMISSION_FAILED.getCode(), ResultStatusEnum.PERMISSION_FAILED.getMessage());
     }
 
 

@@ -1,6 +1,6 @@
 package io.github.touchsun.tdispatch.core.router;
 
-import io.github.touchsun.tdispatch.core.dto.TriggerDTO;
+import io.github.touchsun.tdispatch.core.task.dto.TriggerParam;
 import io.github.touchsun.tdispatch.core.http.Result;
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,9 +20,9 @@ public abstract class EngineRouter {
     /**
      * 根据执行引擎地址列表, 任务触发参数选择一个最优的执行引擎地址
      * 
-     * @param triggerDTO 任务触发参数
+     * @param triggerParam 任务触发参数
      * @param addressList 执行引擎地址列表
      * @return 最优执行引擎地址列表
      */
-    public abstract Result<String> route(TriggerDTO triggerDTO, List<String> addressList);
+    public abstract Result<String> route(TriggerParam triggerParam, List<String> addressList);
 }

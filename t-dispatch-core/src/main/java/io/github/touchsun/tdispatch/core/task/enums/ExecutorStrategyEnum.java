@@ -1,13 +1,15 @@
-package io.github.touchsun.tdispatch.core.cmd.enums;
+package io.github.touchsun.tdispatch.core.task.enums;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * 执行引擎执行任务的阻塞策略类型
+ * 执行引擎执行任务的阻塞策略
  *
  * @author lee
  * @since 2023/6/10 13:47
  */
+@Slf4j
 public enum ExecutorStrategyEnum {
 
     /**
@@ -41,5 +43,25 @@ public enum ExecutorStrategyEnum {
 
     ExecutorStrategyEnum(String title) {
         this.title = title;
+    }
+
+    /**
+     * 根据名称匹配对应的任务执行策略
+     *
+     * @param name 执行策略名称
+     * @param defaultItem 默认执行策略
+     * @return 匹配到的执行策略
+     */
+    public static ExecutorStrategyEnum parse(String name, ExecutorStrategyEnum defaultItem){
+        if (name != null) {
+            for (ExecutorStrategyEnum item: ExecutorStrategyEnum.values()) {
+                if (item.name().equals(name)) {
+                    return item;
+                }
+            }
+        }
+        // 系统未配置对应策略, 直接返回默认
+        log.warn("系统不支持的策略 - {}", defaultItem);
+        return defaultItem;
     }
 }

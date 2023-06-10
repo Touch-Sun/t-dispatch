@@ -46,15 +46,15 @@ public class Task extends BaseModel implements Serializable {
      */
     private String misfireStrategy;
     /**
-     * 执行器路由策略
+     * 执行引擎路由策略
      */
     private String executorRouteStrategy;
     /**
-     * 执行器任务handler
+     * 执行引擎任务handler
      */
     private String executorHandler;
     /**
-     * 执行器任务参数
+     * 执行引擎任务参数
      */
     private String executorParam;
     /**

@@ -1,15 +1,24 @@
 package io.github.touchsun.tdispatch.admin.support.trigger;
 
+import cn.hutool.core.text.StrFormatter;
 import io.github.touchsun.tdispatch.admin.config.TDispatchConfig;
 import io.github.touchsun.tdispatch.api.enums.RegisterType;
 import io.github.touchsun.tdispatch.api.model.Engine;
+import io.github.touchsun.tdispatch.api.model.Log;
 import io.github.touchsun.tdispatch.api.model.Task;
 import io.github.touchsun.tdispatch.core.constant.ConstantNumber;
 import io.github.touchsun.tdispatch.core.constant.ConstantSymbol;
-import io.github.touchsun.tdispatch.core.router.StrategyEnum;
+import io.github.touchsun.tdispatch.core.http.Result;
+import io.github.touchsun.tdispatch.core.http.ResultStatusEnum;
+import io.github.touchsun.tdispatch.core.router.RouteStrategyEnum;
+import io.github.touchsun.tdispatch.core.task.dto.TriggerParam;
+import io.github.touchsun.tdispatch.core.task.enums.ExecutorStrategyEnum;
+import io.github.touchsun.tdispatch.core.util.CrudUtil;
 import io.github.touchsun.tdispatch.core.util.EmptyUtil;
 import io.github.touchsun.tdispatch.core.util.NumberUtil;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.Date;
 
 /**
  * 触发器
@@ -24,7 +33,7 @@ public class Trigger {
      * 任务触发预处理
      *
      * @param taskId         任务ID
-     * @param type           类型 {@link TriggerTypeEnum}
+     * @param triggerType    任务触发类型 {@link TriggerTypeEnum}
      * @param failRetryCount 失败重试次数,若该值>=0就用这个参数否则在使用task配置的重试次数,
      *                       这么做的好处是更灵活的配置重试次数,而不是硬依赖任务配置的重试次数
      * @param shardingParam  分片参数 0/1、1/2...
@@ -34,7 +43,7 @@ public class Trigger {
      * @param executorParam  执行参数
      * @param addressList    执行引擎地址列表 127.0.0.1,127.0.0.2...
      */
-    public static void triggerPreProcessing(final int taskId, final TriggerTypeEnum type, final int failRetryCount,
+    public static void triggerPreProcessing(final int taskId, final TriggerTypeEnum triggerType, final int failRetryCount,
                                             final String shardingParam, final String executorParam, final String addressList) {
         TDispatchConfig config = TDispatchConfig.getInstance();
 
@@ -74,9 +83,9 @@ public class Trigger {
             }
         }
         // 判断是否是全部执行引擎一起执行(分片广播策略)
-        StrategyEnum strategyEnum = StrategyEnum.parse(task.getExecutorRouteStrategy(), null);
+        RouteStrategyEnum routeStrategyEnum = RouteStrategyEnum.parse(task.getExecutorRouteStrategy(), null);
         // 确保执行引擎的注册表不空, 保证有引擎可用, 并且在分片参数未指定的情况下(通知所有实例执行)
-        if (strategyEnum == StrategyEnum.SHARDING_BROADCAST
+        if (routeStrategyEnum == RouteStrategyEnum.SHARDING_BROADCAST
                 && EmptyUtil.isNotEmpty(engine.listOfAddressList())
                 && EmptyUtil.isEmpty(realShardingParam)) {
             // 以0为起始分片索引, (假设此时注册实例为10个) 那么分片形式 -> 0/10, 1/10, 2/10, ... 9/10
@@ -84,7 +93,7 @@ public class Trigger {
             int total = engine.listOfAddressList().size();
             for (int index = 0; index < engine.listOfAddressList().size(); index++) {
                 // 实际触发任务
-                justDoIt(engine, task, taskFailRetryCount, strategyEnum, index, total);
+                justDoIt(engine, task, taskFailRetryCount, triggerType, index, total);
             }
         } else {
             // 不是分片广播策略
@@ -93,7 +102,7 @@ public class Trigger {
                 realShardingParam = new int[]{0, 1};
             }
             // 实际触发任务
-            justDoIt(engine, task, taskFailRetryCount, strategyEnum, realShardingParam[0], realShardingParam[1]);
+            justDoIt(engine, task, taskFailRetryCount, triggerType, realShardingParam[0], realShardingParam[1]);
         }
     }
 
@@ -104,13 +113,90 @@ public class Trigger {
      * @param engine 引擎
      * @param task 任务
      * @param failRetryCount 重试次数(计算出最终的任务重试次数)
-     * @param strategyEnum 策略类型
+     * @param triggerType 任务触发类型
      * @param index 分片索引
      * @param total 分片总数
      */
-    public static void justDoIt(Engine engine, Task task, int failRetryCount, 
-                                StrategyEnum strategyEnum, int index, int total) {
+    public static void justDoIt(Engine engine, Task task, int failRetryCount,
+                                TriggerTypeEnum triggerType, int index, int total) {
+        TDispatchConfig config = TDispatchConfig.getInstance();
         
+        // 解析任务配置的执行策略
+        ExecutorStrategyEnum executorStrategy = ExecutorStrategyEnum.parse(task.getExecutorBlockStrategy(), 
+                ExecutorStrategyEnum.SERIAL_EXECUTION);
+        // 解析任务配置的路由策略
+        RouteStrategyEnum routeStrategy = RouteStrategyEnum.parse(task.getExecutorRouteStrategy(), 
+                null);
+        // 解析任务的分片参数(当然是在任务的路由策略是分片广播的情况下)
+        String shardingParam = null;
+        if (routeStrategy == RouteStrategyEnum.SHARDING_BROADCAST) {
+            shardingParam = StrFormatter.format("{}/{}",index, total);
+        }
+        
+        // 生成该任务的执行日志
+        Log taskLog = CrudUtil.addPrepare(Log.class);
+        // 执行引擎
+        taskLog.setEngineId(engine.getId());
+        // 任务
+        taskLog.setTaskId(task.getId());
+        // 任务触发时间
+        taskLog.setTriggerTime(new Date());
+        // 保存
+        config.getLogService().save(taskLog);
+        log.info("TDispatch🏷️任务触发开始, 任务ID: {}, 触发时间: {}", task.getId(), taskLog.getTriggerTime());
+        
+        // 初始化触发参数
+        TriggerParam triggerParam = TriggerParam.builder()
+                .taskId(task.getId())
+                .executorHandler(task.getExecutorHandler())
+                .executorParams(task.getExecutorParam())
+                .executorBlockStrategy(task.getExecutorBlockStrategy())
+                .executorTimeout(task.getExecutorTimeout())
+                .logId(taskLog.getId())
+                .logDateTime(taskLog.getTriggerTime().getTime())
+                .glueType(task.getGlueType())
+                .glueSource(task.getGlueSource())
+                .glueUpdateTime(task.getGlueUpdateTime().getTime())
+                .broadcastIndex(index)
+                .broadcastTotal(total)
+                .build();
+        
+        // 初始化执行引擎实例地址
+        String engineAddress = null;
+        // 根据路由策略选举出最优的执行引擎实例地址
+        Result<String> routeResult = null;
+        if (EmptyUtil.isNotEmpty(engine.listOfAddressList())) {
+            // 有可用执行引擎实例地址
+            routeResult = routeStrategy.getRouter().route(triggerParam, engine.listOfAddressList());
+            // 选举成功
+            if (routeResult.getCode() == ResultStatusEnum.SUCCESS.getCode()) {
+                engineAddress = routeResult.getData();
+            }
+        } else {
+            // 无可用执行引擎实例地址
+            routeResult = Result.failed("无可用执行引擎实例地址");
+        }
+        
+        // 启动远程分布式部署的执行引擎
+        Result<String> triggerResult = null;
+        if (EmptyUtil.isNotEmpty(engineAddress)) {
+            triggerResult = runEngine(triggerParam, engineAddress);
+        } else {
+            triggerResult = Result.failed("启动远程分布式部署的执行引擎失败, 由于无可用执行引擎实例地址");
+        }
+    }
+
+    /**
+     * 启动远程分布式部署的执行引擎
+     * 
+     * @param triggerParam 启动参数
+     * @param engineAddress 执行引擎实例地址
+     * @return 启动结果
+     */
+    private static Result<String> runEngine(TriggerParam triggerParam, String engineAddress) {
+        //TODO 启动远程分布式部署的执行引擎
+        
+        return null;
     }
 }
 

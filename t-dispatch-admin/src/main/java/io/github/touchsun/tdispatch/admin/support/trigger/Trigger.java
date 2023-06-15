@@ -2,6 +2,7 @@ package io.github.touchsun.tdispatch.admin.support.trigger;
 
 import cn.hutool.core.text.StrFormatter;
 import io.github.touchsun.tdispatch.admin.config.TDispatchConfig;
+import io.github.touchsun.tdispatch.admin.support.scheduler.TDispatchFlowScheduler;
 import io.github.touchsun.tdispatch.api.enums.RegisterType;
 import io.github.touchsun.tdispatch.api.model.Engine;
 import io.github.touchsun.tdispatch.api.model.Log;
@@ -11,12 +12,14 @@ import io.github.touchsun.tdispatch.core.constant.ConstantSymbol;
 import io.github.touchsun.tdispatch.core.http.Result;
 import io.github.touchsun.tdispatch.core.http.ResultStatusEnum;
 import io.github.touchsun.tdispatch.core.router.RouteStrategyEnum;
+import io.github.touchsun.tdispatch.core.task.api.EngineRunner;
 import io.github.touchsun.tdispatch.core.task.dto.TriggerParam;
 import io.github.touchsun.tdispatch.core.task.enums.ExecutorStrategyEnum;
 import io.github.touchsun.tdispatch.core.util.CrudUtil;
 import io.github.touchsun.tdispatch.core.util.EmptyUtil;
 import io.github.touchsun.tdispatch.core.util.NumberUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.codehaus.groovy.classgen.asm.BytecodeHelper;
 
 import java.util.Date;
 
@@ -194,8 +197,13 @@ public class Trigger {
      * @return 启动结果
      */
     private static Result<String> runEngine(TriggerParam triggerParam, String engineAddress) {
-        //TODO 启动远程分布式部署的执行引擎
+        // 启动远程分布式部署的执行引擎
+        Result<String> result = null;
+        EngineRunner engineRunner = TDispatchFlowScheduler.getEngineRunner(engineAddress);
+        Result<String> runResult = engineRunner.run(triggerParam);
         
+        //TODO 结果处理
+
         return null;
     }
 }

@@ -2,6 +2,7 @@ package io.github.touchsun.tdispatch.core.router;
 
 import io.github.touchsun.tdispatch.core.router.strategy.FirstRouter;
 import io.github.touchsun.tdispatch.core.router.strategy.LastRouter;
+import io.github.touchsun.tdispatch.core.router.strategy.RandomRouter;
 import io.github.touchsun.tdispatch.core.router.strategy.ShardingBroadcastRouter;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public enum RouteStrategyEnum {
     /**
      * 随机选择引擎
      */
-    RANDOM("随机选择引擎", null),
+    RANDOM("随机选择引擎", new RandomRouter()),
 
     /**
      * 基于一致性哈希算法选择引擎，该算法可以有效地解决缓存和负载均衡问题

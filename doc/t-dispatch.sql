@@ -1,17 +1,5 @@
 /*
- Navicat MySQL Data Transfer
-
- Source Server         : MYSQL-3306
- Source Server Type    : MySQL
- Source Server Version : 80032
- Source Host           : 127.0.0.1:3306
- Source Schema         : t-dispatch
-
- Target Server Type    : MySQL
- Target Server Version : 80032
- File Encoding         : 65001
-
- Date: 17/06/2023 08:24:50
+ t-dispatch 初始化脚本
 */
 
 SET NAMES utf8mb4;
